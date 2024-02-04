@@ -1,6 +1,7 @@
 package com.github.chmatvey.auth.service.impl;
 
 import com.github.chmatvey.auth.client.UserClient;
+import com.github.chmatvey.auth.client.dto.UserCreateRequest;
 import com.github.chmatvey.auth.client.dto.UserLogInResponse;
 import com.github.chmatvey.auth.dto.LogInRequest;
 import com.github.chmatvey.auth.dto.LogInResponse;
@@ -15,9 +16,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.github.chmatvey.auth.client.dto.UserRole.CLIENT;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = AuthServiceImpl.class)
@@ -48,9 +52,10 @@ class AuthServiceImplTest {
         authService.registerClient(request);
 
         // Then
-        verify(userClient).create(UserRegisterRequest.builder()
+        verify(userClient).create(UserCreateRequest.builder()
                 .login(request.login())
                 .password("hashedPassword")
+                .role(CLIENT)
                 .build());
     }
 

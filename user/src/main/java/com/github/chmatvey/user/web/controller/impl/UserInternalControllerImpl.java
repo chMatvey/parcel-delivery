@@ -6,7 +6,6 @@ import com.github.chmatvey.user.dto.UserLogInResponse;
 import com.github.chmatvey.user.service.UserService;
 import com.github.chmatvey.user.web.controller.UserInternalController;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
