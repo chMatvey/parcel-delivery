@@ -1,0 +1,6 @@
+integration:
+  user:
+    url: ${USER_SERVICE_URL:http://localhost:8001/api/public/v1/user}
+
+password:
+  salt: farel
