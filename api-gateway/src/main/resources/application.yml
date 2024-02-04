@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+
+  cloud:
+    gateway:
+      routes:
+        - id: user-service-route
+          uri: ${USER_SERVICE_HOST:http://localhost:8001}
+          predicates:
+            - Path=/api/v1/user/**
+          filters:
+            - JwtAuth=ADMIN
+
+        - id: auth-public-route
+          uri: ${AUTH_SERVICE_HOST:http://localhost:8002}
+          predicates:
+            - Path=/api/public/v1/auth/**
+
+        - id: auth-admin-route
+          uri: ${AUTH_SERVICE_HOST:http://localhost:8002}
+          predicates:
+            - Path=/api/v1/auth/**
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+    com.github.chmatvey.apigateway.filter: DEBUG
