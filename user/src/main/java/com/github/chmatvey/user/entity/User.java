@@ -27,11 +27,13 @@ public class User {
     @GeneratedValue(strategy = SEQUENCE, generator = "users_id_seq")
     long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     String login;
 
+    @Column(nullable = false)
     String password;
 
+    @Column(nullable = false)
     @Enumerated(STRING)
     UserRole role;
 
