@@ -1,9 +1,6 @@
 package com.github.chmatvey.delivery.common.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 import static com.github.chmatvey.delivery.common.entity.DeliveryStatus.*;
+import static jakarta.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PRIVATE;
 
 @Data
@@ -37,6 +35,7 @@ public class Delivery {
     @Column(name = "courier_id", nullable = false)
     long courierId;
 
+    @Enumerated(STRING)
     @Column(nullable = false)
     @Builder.Default
     DeliveryStatus status = CREATED;

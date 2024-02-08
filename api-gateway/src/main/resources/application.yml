@@ -10,10 +10,18 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: user-service-route
+        - id: user-service-courier-route
           uri: ${USER_SERVICE_HOST:http://localhost:8001}
           predicates:
-            - Path=/api/v1/user/**
+            - Path=/api/v1/user/courier/**
+            - Method=PUT
+          filters:
+            - JwtAuth=COURIER
+
+        - id: user-service-admin-route
+          uri: ${USER_SERVICE_HOST:http://localhost:8001}
+          predicates:
+            - Path=/api/v1/user/courier/**
           filters:
             - JwtAuth=ADMIN
 
