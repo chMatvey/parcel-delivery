@@ -17,14 +17,9 @@ public enum OrderStatus {
     CANCELED,
 
     /**
-     * Courier is accepted the order and is on the way to the pickup location.
+     * Courier is accepted the order.
      */
     PICKUP_ACCEPTED,
-
-    /**
-     * Courier collected the order and is on the way to the delivery location.
-     */
-    PROCESSING,
 
     /**
      * Order is delivered to the delivery location.
