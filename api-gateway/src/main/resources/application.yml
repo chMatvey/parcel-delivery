@@ -51,6 +51,13 @@ spring:
           filters:
             - JwtAuth=ADMIN
 
+        - id: delivery-courier-route
+          uri: ${DELIVERY_SERVICE_HOST:http://localhost:8004}
+          predicates:
+            - Path=/api/v1/delivery/courier/**
+          filters:
+            - JwtAuth=COURIER
+
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG

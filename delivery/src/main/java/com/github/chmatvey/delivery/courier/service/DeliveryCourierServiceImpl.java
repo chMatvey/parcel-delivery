@@ -1,10 +1,12 @@
 package com.github.chmatvey.delivery.courier.service;
 
-import com.github.chmatvey.delivery.common.client.OrderClient;
+import com.github.chmatvey.delivery.common.dto.DeliveryAcceptMessage;
+import com.github.chmatvey.delivery.common.dto.DeliveryCompleteMessage;
 import com.github.chmatvey.delivery.common.entity.Delivery;
 import com.github.chmatvey.delivery.common.error.DeliveryNotFoundException;
 import com.github.chmatvey.delivery.common.error.UnexpectedDeliveryStatusException;
 import com.github.chmatvey.delivery.common.repository.DeliveryRepository;
+import com.github.chmatvey.delivery.common.service.RabbitProducerService;
 import com.github.chmatvey.delivery.courier.dto.DeliveryDetailsResponse;
 import com.github.chmatvey.delivery.courier.dto.DeliveryDto;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,7 @@ import static com.github.chmatvey.delivery.common.entity.DeliveryStatus.CREATED;
 @RequiredArgsConstructor
 public class DeliveryCourierServiceImpl implements DeliveryCourierService {
     private final DeliveryRepository deliveryRepository;
-    private final OrderClient orderClient;
+    private final RabbitProducerService producerService;
 
     @Override
     public void acceptDelivery(long orderId, long courierId) {
@@ -30,8 +32,7 @@ public class DeliveryCourierServiceImpl implements DeliveryCourierService {
 
         deliveryRepository.save(delivery.accept());
 
-        // todo replace om message pushing
-        orderClient.acceptOrder(orderId);
+        producerService.sendDeliveryAcceptedMessage(DeliveryAcceptMessage.create(delivery));
     }
 
     @Override
@@ -42,6 +43,8 @@ public class DeliveryCourierServiceImpl implements DeliveryCourierService {
             throw new UnexpectedDeliveryStatusException(delivery.getStatus());
 
         deliveryRepository.save(delivery.complete());
+
+        producerService.sendDeliveryCompleteMessage(DeliveryCompleteMessage.create(delivery));
     }
 
     @Override
@@ -57,7 +60,7 @@ public class DeliveryCourierServiceImpl implements DeliveryCourierService {
     }
 
     private Delivery findDelivery(long orderId, long courierId) {
-        return deliveryRepository.findByOrderIdAndClientId(orderId, courierId)
+        return deliveryRepository.findByOrderIdAndCourierId(orderId, courierId)
                 .orElseThrow(DeliveryNotFoundException::new);
     }
 }

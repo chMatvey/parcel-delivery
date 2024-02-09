@@ -30,7 +30,7 @@
       "vhost": "/",
       "type": "direct",
       "durable": true,
-      "autoDelete": false,
+      "auto_delete": false,
       "internal": false,
       "arguments": {}
     }

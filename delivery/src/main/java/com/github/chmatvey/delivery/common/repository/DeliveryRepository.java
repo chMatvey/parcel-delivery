@@ -11,7 +11,9 @@ import java.util.Optional;
 public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
     Optional<Delivery> findByOrderIdAndClientId(long orderId, long clientId);
 
-    @Query("select new com.github.chmatvey.delivery.courier.dto.DeliveryDto(d.status, d.updatedAt) from Delivery d " +
+    Optional<Delivery> findByOrderIdAndCourierId(long orderId, long courierId);
+
+    @Query("select new com.github.chmatvey.delivery.courier.dto.DeliveryDto(d.orderId, d.status, d.updatedAt) from Delivery d " +
             "where d.courierId =:courierId and d.completed = false and d.canceled = false")
     List<DeliveryDto> findByCourierId(long courierId);
 }

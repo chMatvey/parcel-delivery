@@ -11,7 +11,7 @@ create table deliveries
     source_address   varchar(255)       not null,
     delivery_address varchar(255)       not null,
 
-    delivery_date    timestamp          not null,
+    delivery_date    timestamp,
 
     version          integer            not null,
     created_at       timestamp          not null default now(),

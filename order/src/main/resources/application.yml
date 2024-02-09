@@ -24,7 +24,19 @@ spring:
     schemas: parcel
     create-schemas: true
     baseline-version: 1
+  rabbitmq:
+    template:
+      exchange: ${ORDER_ASSIGN_EXCHANGE:parcel.direct}
+      routing-key: ${ORDER_ASSIGN_ROUTING_KEY:order-assign.routing-key}
+    addresses: ${RABBITMQ_HOST:localhost:5672}
 
 integration:
   delivery:
     url: ${DELIVERY_SERVICE_URL:http://localhost:8004/api/internal/v1/delivery}
+
+message-broker:
+  queues:
+    delivery-accept: ${DELIVERY_ACCOUNT_QUEUE:delivery-accept.queue}
+    delivery-complete: ${DELIVERY_COMPLETE_QUEUE:delivery-complete.queue}
+
+

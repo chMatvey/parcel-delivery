@@ -57,6 +57,7 @@ public class Delivery {
     @Column(name = "delivery_date", nullable = false)
     LocalDateTime deliveryDate;
 
+    @Version
     Integer version;
 
     @UpdateTimestamp
@@ -73,6 +74,7 @@ public class Delivery {
 
     public Delivery complete() {
         return this.setCompleted(true)
+                .setDeliveryDate(LocalDateTime.now())
                 .setStatus(COMPLETED);
     }
 
