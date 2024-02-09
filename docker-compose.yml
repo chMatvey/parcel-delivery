@@ -15,9 +15,22 @@ services:
     networks:
       - postgres
 
+  rabbitmq:
+    container_name: rabbitmq
+    build:
+      context: ./rabbitmq
+      dockerfile: Dockerfile
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - spring
+
 volumes:
   postgres:
 
 networks:
   postgres:
+    driver: bridge
+  spring:
     driver: bridge

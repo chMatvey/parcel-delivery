@@ -1,0 +1,87 @@
+{
+  "users": [
+    {
+      "name": "guest",
+      "password_hash": "BMfxN8drrYcIqXZMr+pWTpDT0nMcOagMduLX0bjr4jwud/pN",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": [
+        "administrator"
+      ],
+      "limits": {}
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "parcel.direct",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "autoDelete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "queues": [
+    {
+      "name": "order-assign.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "delivery-accept.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "delivery-complete.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "parcel.direct",
+      "vhost": "/",
+      "destination": "order-assign.queue",
+      "destination_type": "queue",
+      "routing_key": "order-assign.routing-key",
+      "arguments": {}
+    },
+    {
+      "source": "parcel.direct",
+      "vhost": "/",
+      "destination": "delivery-accept.queue",
+      "destination_type": "queue",
+      "routing_key": "delivery-accept.routing-key",
+      "arguments": {}
+    },
+    {
+      "source": "parcel.direct",
+      "vhost": "/",
+      "destination": "delivery-complete.queue",
+      "destination_type": "queue",
+      "routing_key": "delivery-complete.routing-key",
+      "arguments": {}
+    }
+  ]
+}
