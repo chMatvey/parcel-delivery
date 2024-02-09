@@ -8,4 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public interface DeliveryClientController {
     @Operation(description = "Get delivery details")
     DeliveryDetails getDeliveryDetails(long orderId, long clientId);
+
+    @Operation(description = "Cancel delivery")
+    void cancelDelivery(long orderId);
 }

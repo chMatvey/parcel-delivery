@@ -24,3 +24,7 @@ spring:
     schemas: parcel
     create-schemas: true
     baseline-version: 1
+
+integration:
+  delivery:
+    url: ${DELIVERY_SERVICE_URL:http://localhost:8004/api/internal/v1/delivery}

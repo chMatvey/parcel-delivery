@@ -1,5 +1,6 @@
 package com.github.chmatvey.delivery.courier.service;
 
+import com.github.chmatvey.delivery.common.client.OrderClient;
 import com.github.chmatvey.delivery.common.entity.Delivery;
 import com.github.chmatvey.delivery.common.error.DeliveryNotFoundException;
 import com.github.chmatvey.delivery.common.error.UnexpectedDeliveryStatusException;
@@ -18,6 +19,7 @@ import static com.github.chmatvey.delivery.common.entity.DeliveryStatus.CREATED;
 @RequiredArgsConstructor
 public class DeliveryCourierServiceImpl implements DeliveryCourierService {
     private final DeliveryRepository deliveryRepository;
+    private final OrderClient orderClient;
 
     @Override
     public void acceptDelivery(long orderId, long courierId) {
@@ -27,6 +29,9 @@ public class DeliveryCourierServiceImpl implements DeliveryCourierService {
             throw new UnexpectedDeliveryStatusException(delivery.getStatus());
 
         deliveryRepository.save(delivery.accept());
+
+        // todo replace om message pushing
+        orderClient.acceptOrder(orderId);
     }
 
     @Override

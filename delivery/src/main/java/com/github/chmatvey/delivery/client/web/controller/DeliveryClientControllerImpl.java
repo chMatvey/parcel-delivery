@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/delivery/client")
+@RequestMapping("/api/internal/v1/delivery/client")
 @RequiredArgsConstructor
 public class DeliveryClientControllerImpl implements DeliveryClientController {
     private final DeliveryClientService deliveryService;
@@ -16,5 +16,11 @@ public class DeliveryClientControllerImpl implements DeliveryClientController {
     public DeliveryDetails getDeliveryDetails(@PathVariable long orderId,
                                               @RequestHeader("User-Id") long clientId) {
         return deliveryService.getDeliveryDetails(orderId, clientId);
+    }
+
+    @DeleteMapping("/{orderId}")
+    @Override
+    public void cancelDelivery(@PathVariable long orderId) {
+        deliveryService.cancelDelivery(orderId);
     }
 }
