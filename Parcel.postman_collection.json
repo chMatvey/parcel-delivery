@@ -1,0 +1,535 @@
+{
+	"info": {
+		"_postman_id": "837e9ee4-528a-47db-8858-a4a042a710e9",
+		"name": "Parcel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3563924"
+	},
+	"item": [
+		{
+			"name": "API GW",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"login\": \"courier\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gw_host}}/api/public/v1/auth/log-in",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"public",
+										"v1",
+										"auth",
+										"log-in"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"login\": \"Matvey\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gw_host}}/api/public/v1/auth/register",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"public",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create courier account",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"login\": \"courier\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gw_host}}/api/v1/auth/courier/register",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"courier",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "User info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gw_host}}/api/v1/user",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all couriers",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gw_host}}/api/v1/user/courier",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"courier"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Set courier status",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"status\": \"ACTIVE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gw_host}}/api/v1/user/courier",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"courier"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Order",
+					"item": [
+						{
+							"name": "admin",
+							"item": [
+								{
+									"name": "Assign order",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orderId\": 9,\n    \"courierId\": 3\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gw_host}}/api/v1/order/admin/assign",
+											"host": [
+												"{{gw_host}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order",
+												"admin",
+												"assign"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Create Order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"details\": \"Documents delivery\",\n    \"origin\": \"92142 Louann Flat, East Julianchester, MD 03496-6054\",\n    \"destination\": \"202 Tillman Plaza, Idaport, ID 90626-5589\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gw_host}}/api/v1/order/client",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"client"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Order Details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gw_host}}/api/v1/order/client/10/details",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"client",
+										"10",
+										"details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Order List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gw_host}}/api/v1/order/client",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"client"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change destination",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"destination\": \"test\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gw_host}}/api/v1/order/client/1/destination",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"client",
+										"1",
+										"destination"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel Order",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gw_host}}/api/v1/order/client/1",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order",
+										"client",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delivery",
+					"item": [
+						{
+							"name": "Get deliveries",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gw_host}}/api/v1/delivery/courier",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"courier"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get delivery details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gw_host}}/api/v1/delivery/courier/1/details",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"courier",
+										"1",
+										"details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accept delivery",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{gw_host}}/api/v1/delivery/courier/9/accept",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"courier",
+										"9",
+										"accept"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Complete delivery",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{gw_host}}/api/v1/delivery/courier/9/complete",
+									"host": [
+										"{{gw_host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"courier",
+										"9",
+										"complete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJDT1VSSUVSIiwiZXhwIjoxNzA3NTI3NjczfQ.qO3sUwpQaRu29unaQluNQtLETHezPCjqr-Q-0yBM9HQ",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "Authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user_host",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "auth_host",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "gw_host",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "order_host",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
