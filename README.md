@@ -51,3 +51,9 @@ Import *Parcel.postman_collection.json* file in root directory
 [Order service](http://localhost:8003/swagger-ui/index.html)
 
 [Delivery service](http://localhost:8004/swagger-ui/index.html)
+
+## Todo
+
+- Error handling (not fully completed) 
+- Unit test coverage 
+- Integration tests
