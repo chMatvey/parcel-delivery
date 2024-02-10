@@ -19,12 +19,93 @@ services:
     container_name: rabbitmq
     build:
       context: ./rabbitmq
-      dockerfile: Dockerfile
     ports:
       - "5672:5672"
       - "15672:15672"
     networks:
       - spring
+
+  user:
+    container_name: user
+    build:
+      context: ./user
+    ports:
+      - "8001:8001"
+    environment:
+      DB_HOST: postgres
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - postgres
+
+  auth:
+    container_name: auth
+    build:
+      context: ./auth
+    ports:
+      - "8002:8002"
+    environment:
+      USER_SERVICE_URL: http://user:8001/api/internal/v1/user
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - postgres
+
+  order:
+    container_name: order
+    build:
+      context: ./order
+    ports:
+      - "8003:8003"
+    environment:
+      DB_HOST: postgres
+      RABBITMQ_HOST: rabbitmq:5672
+      DELIVERY_SERVICE_URL: http://delivery:8004/api/internal/v1/delivery
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  delivery:
+    container_name: delivery
+    build:
+      context: ./delivery
+    ports:
+      - "8004:8004"
+    environment:
+      DB_HOST: postgres
+      RABBITMQ_HOST: rabbitmq:5672
+      ORDER_SERVICE_URL: http://order:8003/api/internal/v1/order
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      USER_SERVICE_HOST: http://user:8001
+      AUTH_SERVICE_HOST: http://auth:8002
+      ORDER_SERVICE_HOST: http://order:8003
+      DELIVERY_SERVICE_HOST: http://delivery:8004
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - user
+      - auth
+      - order
+      - delivery
 
 volumes:
   postgres:
