@@ -14,4 +14,4 @@ password:
 
 jwt:
     secret: ${JWT_SECRET:farel}
-    expiration: 3600
+    expiration: ${JWT_EXPIRATION:3600}
