@@ -2,6 +2,7 @@
 
 cd ./jwt-spring-boot-starter
 ./gradlew build
+./gradlew publishToMavenLocal
 
 cd ../user
 ./gradlew bootJar

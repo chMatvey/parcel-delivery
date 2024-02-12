@@ -1,5 +1,6 @@
 cd jwt-spring-boot-starter
 gradlew.bat build
+gradlew.bat publishToMavenLocal
 
 cd ../user
 gradlew.bat bootJar
